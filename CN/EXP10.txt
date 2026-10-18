@@ -1,0 +1,20 @@
+nano scratch/exp10-lan.cc
+
+ctrl+o (to save) and ctrl+x (to exit)
+
+./waf --run scratch/exp10-lan
+
+ip route show
+sudo ip route add 10.10.10.0/24 dev lo
+ip route
+sudo ip route del 10.10.10.0/24
+ip route show
+
+sudo sysctl -w net.ipv4.ip_forward=1
+cat /proc/sys/net/ipv4/ip_forward
+sudo iptables -L -n -v
+sudo iptables -A INPUT -p tcp --dport 8080 -j DROP
+sudo iptables -L INPUT -n -v
+sudo iptables -D INPUT -p tcp --dport 8080 -j DROP
+sudo iptables -L INPUT -n -v
+
