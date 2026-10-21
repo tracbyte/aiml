@@ -1,37 +1,25 @@
 from collections import deque
 
-# Define the graph using a dictionary where keys are nodes
-graph = {
-    'A': ['B', 'C'],
-    'B': ['D', 'E'],
-    'C': ['F'],
-    'D': [],
-    'E': ['F'],
-    'F': []
-}
-
 def bfs(graph, start, goal):
-    # Queue stores paths, initialized with the start node
     queue = deque([[start]])
-    visited = set()
+    visited = {start}
 
     while queue:
         path = queue.popleft()
         node = path[-1]
 
-        # Return the path if we reached the goal
         if node == goal:
             return path
 
-        if node not in visited:
-            visited.add(node)
-
-            # Generate and queue new paths for each neighbor
-            for neighbour in graph[node]:
-                new_path = list(path)
-                new_path.append(neighbour)
-                queue.append(new_path)
-
+        for neighbor in graph.get(node, []):
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(path + [neighbor])
     return None
 
-print("Path:", bfs(graph, 'A', 'F'))
+graph = {
+    'A': ['B', 'C'], 'B': ['D', 'E'], 'C': ['F'], 
+    'D': [], 'E': ['G'], 'F': ['G'], 'G': []
+}
+
+print("BFS Path:", bfs(graph, 'A', 'G'))
