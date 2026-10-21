@@ -1,0 +1,21 @@
+lsb_release -a
+python3 --version
+
+sudo apt update
+sudo apt install -y g++ python3 python3-dev qtbase5-dev qtchooser qt5-qmake mercurial bzr git
+sudo apt install -y python-is-python3 && python --version
+
+cd
+wget https://www.nsnam.org/release/ns-allinone-3.29.tar.bz2
+
+tar -xjf ns-allinone-3.29.tar.bz2
+cd ~/ns-allinone-3.29
+ls
+
+python3 build.py
+
+cd ~/ns-allinone-3.29/ns-3.29
+./waf --version
+
+./waf configure --disable-werror
+./waf --run scratch-simulator
