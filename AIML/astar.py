@@ -1,7 +1,6 @@
 import heapq
 
 def a_star(graph, start, goal, h):
-    # Queue: (f_cost, g_cost, current_node, path)
     pq = [(h[start], 0, start, [start])]
     
     while pq:
